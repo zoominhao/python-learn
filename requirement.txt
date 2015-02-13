@@ -1,0 +1,60 @@
+基于Python 2.7.X 封装实现一个可重用的类，具体要求如下：
+1. 该类能读取Lua table构造式（Lua 5.2.X）定义的数据，并以Python字典的方式读写数据
+2. 给定一个Python字典，可以更新类中的数据，并以Lua table构造式输出
+3. 遵循Lua table构造式定义确保相同的同构数据源彼此转换后数据仍然一致
+4. 支持将数据分别以Lua table格式存储到文件并加载回来使用
+5. 只允许使用Python内置模块（如sys、math）和string模块，不允许使用其他标准模块及任何第三方开发库（包括但不限于re）
+6. 独立完成作业，并附带测试代码及一份简短的模块使用说明
+
+注意：
+为简便考虑，Lua table中下标只有数字和字符串两种类型，值只有（nil，布尔，数字，字符串，table）5种类型；并且全部字符串都是ANSI编码。
+如果lua table中出现"[key]=value"则一律转换为python中的dict，否则转换为python中的list。
+对于lua table中出现的nil，如果该table是list，nil就要转换为None；如果是dict，value为nil的对应到python dict中就忽略这个（key，value）pair
+
+基本要求：
+提交Python代码文件名为PyLuaTblParser.py, 测试代码和文档可以打一个包作为第二个附件提交
+PyLuaTblParser.py 中包含一个class，类名为PyLuaTblParser，类中包含以下方法：
+1. load(self, s)    读取Lua table数据，输入s为一个符合Lua table定义的字符串，无返回值；若遇到Lua table格式错误的应该抛出异常；
+2. dump(self)  根据类中数据返回Lua table字符串
+3. loadLuaTable(self, f)  从文件中读取Lua table字符串，f为文件路径，异常处理同1，文件操作失败抛出异常；
+4. dumpLuaTable(self, f) 将类中的内容以Lua table格式存入文件，f为文件路径，文件若存在则覆盖，文件操作失败抛出异常；
+5. loadDict(self, d)   读取dict中的数据，存入类中，只处理数字和字符串两种类型的key，其他类型的key直接忽略；
+6. dumpDict(self)  返回一个dict，包含类中的数据
+做5和6的操作时，注意不要直接引用输入参数d，也不要返回类中内置的字典的引用
+
+进阶要求：
+1. PyLuaTblParser类支持用[]进行赋值、读写数据的操作，类似字典
+2. PyLuaTblParser类包含update(self, d)用字典d更新类中的数据，类似于字典的update
+
+基本测试方法：
+a1 = PyLuaTblParser()
+a2 = PyLuaTblParser()
+a3 = PyLuaTblParser()
+
+test_str = '{array = {65,23,5,},dict = {mixed = {43,54.33,false,9,string = "value",},array = {3,6,4,},string = "value",},}'
+a1.load(test_str)
+d1 = a1.dumpDict()
+
+a1.loadDict(d1)
+a2.dumpLuaTable(file_path)
+a3.loadLuaTable(file_path)
+
+d3 = a3.dumpDict()
+
+附：test_str对应的Python dict：
+{
+     "array": [65, 23, 5],
+     "dict": {
+          "mixed": {
+               1: 43,
+               2: 54.33,
+               3: false,
+               4: 9
+               "string": "value"
+          },
+          "array": [3, 6, 4],
+          "string": "value"
+     }
+}
+
+

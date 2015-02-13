@@ -1,0 +1,52 @@
+{
+["root"] =
+		{
+		["test"] = 3,
+		["Test Pattern String"]=1,
+		["Test obj"] = {["object with 1 member"] = {"array with 1 element"},},
+		["Test enpty obj"] = {},
+		["Test ary"] = {"a", 1 , nil, true, false} ,
+		["Test enpty ary"] = {},
+		["Test ary with obj1"] = {{}},
+		["Test ary with obj2"] = {{},{}},
+		["Test ary with obj3"] = {{}, 1, 2, nil},
+		["Test ary with obj4"] = {1, 2, {["1"] = 1}},
+		["Test ary with obj5"] = {{["1"]=1, ["2"]=2}, {["1"]=1, ["2"]=2}},
+		["99"] = -42,
+		["true"]= true,
+		["false"]=false,
+		["null"] = nil,
+		["other"]= {	["integer"]=1234567890,
+					["real"]=-9876.543210,
+					["e"]=0.123456789e-12,
+					["E"]= 1.234567890E+34,
+					["zero"]=0,
+					["one"] = 1,
+					["empty"] = "",
+					["space"] = " ",
+					["quote"] = "\"",
+					["backslash"] = "\\",
+					["controls"] = "\b\f\n\r\t",
+					["slash"] = "/ & ",
+					["alpha"]= "abcdefghijklmnopqrstuvwyz",
+					["ALPHA"] = "ABCDEFGHIJKLMNOPQRSTUVWYZ",
+					["digit"] = "0123456789",
+					["special"] = "`1~!@#$%^&*()_+-={':[,]}|;.</>?",
+					["array"] = {nil, nil},
+					["address"] = "50 St. James Street",
+					["url"] = "http://www.JSON.org/",
+					["comment"] = "// /* <!-- --",
+					["# -- --> */"] = " ",
+					[" s p a c e d "] = {1,2 , 3
+
+						,
+						4 , 5        ,          6           ,7        },
+					["compact"]={1,2,3,4,5,6,7},
+					["luatext"]="{123}"
+				},
+		['/\\"\n\r\t`1~!@#$%^&*()_+-=[]{}|;:\',./<>?'] = "erw",
+		[1.0] =3,
+		['2.0']=4,
+		c={{}}
+	}
+}
